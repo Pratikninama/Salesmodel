@@ -8,4 +8,4 @@ Sales_dataframe['Price Per Item'] = Sales_dataframe['Sales']/Sales_dataframe['Qu
 print(Sales_dataframe)
 new_df = pd.merge(Sales_dataframe,State_dataframes,on='State',how="left")
 print(new_df)
-new_df.to_csv(r'C:\Users\prati\PycharmProjects\Salesmodel\output_data\Sales_ouput.csv', index=False)
+new_df.to_csv(r'C:\Users\prati\PycharmProjects\Salesmodel\output_data\Sales_output.csv', index=False)
