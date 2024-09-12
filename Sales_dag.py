@@ -13,7 +13,7 @@ default_args = {
 }
 
 dag = DAG(
-    'read_transform_load_csv',
+    'Salesdata_dag',
     default_args=default_args,
     description='A DAG to read, transform, and load CSV data',
     schedule_interval='0 9 * * *',  # Set to 'daily' or any other interval as needed
