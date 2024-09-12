@@ -21,7 +21,7 @@ dag = DAG(
 
 
 def read_excel(**kwargs):
-    file_path = r'sample_data/Sample - Superstore.xls'
+    file_path = r'dag sample_data/Sample - Superstore.xls'
     df = pd.read_excel(file_path)
     # Serialize DataFrame to JSON for XCom
     kwargs['ti'].xcom_push(key='raw_data', value=df.to_json())
@@ -45,7 +45,7 @@ def load_to_csv(**kwargs):
     transformed_data = ti.xcom_pull(key='transformed_data', task_ids='transform_data')
     df = pd.read_json(transformed_data)
 
-    output_csv_file_path = r'output_data/Sales_DAG.csv'
+    output_csv_file_path = r'dag output_data/Sales_DAG.csv'
     # Ensure output directory exists
     os.makedirs(os.path.dirname(output_csv_file_path), exist_ok=True)
     df.to_csv(output_csv_file_path, index=False)
