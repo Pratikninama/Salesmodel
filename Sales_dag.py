@@ -1,3 +1,5 @@
+import pathlib
+
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 import pandas as pd
@@ -21,27 +23,23 @@ dag = DAG(
 
 
 def read_excel(**kwargs):
-    file_path = r'dag sample_data/Sample - Superstore.xls'
+    file_path = str(pathlib.Path(__file__).parent.absolute())
     df = pd.read_excel(file_path)
-    # Serialize DataFrame to JSON for XCom
     kwargs['ti'].xcom_push(key='raw_data', value=df.to_json())
 
 
 def transform_data(**kwargs):
     ti = kwargs['ti']
-    # Pull and deserialize DataFrame from XCom
     raw_data = ti.xcom_pull(key='raw_data', task_ids='read_excel')
     df = pd.read_json(raw_data)
 
     # Perform transformation
     df['transformed_column'] = df['Sales'] / df['Quantity']
-    # Serialize transformed DataFrame to JSON for XCom
     ti.xcom_push(key='transformed_data', value=df.to_json())
 
 
 def load_to_csv(**kwargs):
     ti = kwargs['ti']
-    # Pull and deserialize DataFrame from XCom
     transformed_data = ti.xcom_pull(key='transformed_data', task_ids='transform_data')
     df = pd.read_json(transformed_data)
 
