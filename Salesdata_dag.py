@@ -25,7 +25,7 @@ dag = DAG(
 def read_excel(**kwargs):
     from pathlib import Path
     #file_path = str(Path("sample_data/Sample-Superstore.xls").parent.absolute())
-    file_path =  './Salesmodel/sample_data/Sample-Superstore.xls'
+    file_path =  'Salesmodel/sample_data/Sample-Superstore.xls'
     print("file_path : ", file_path )
 
     df = pd.read_excel(file_path)
