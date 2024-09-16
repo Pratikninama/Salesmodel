@@ -24,8 +24,10 @@ dag = DAG(
 
 def read_excel(**kwargs):
     from pathlib import Path
-    file_path = str(Path("sample_data/Sample-Superstore.xls").parent.absolute())
+    #file_path = str(Path("sample_data/Sample-Superstore.xls").parent.absolute())
+    file_path =  'sample_data/Sample-Superstore.xls'
     print(file_path)
+
     df = pd.read_excel(file_path)
     kwargs['ti'].xcom_push(key='raw_data', value=df.to_json())
 
