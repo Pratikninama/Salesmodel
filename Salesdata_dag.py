@@ -27,7 +27,7 @@ def read_excel(**kwargs):
     #file_path = str(Path("sample_data/Sample-Superstore.xls").parent.absolute())
     absolute_file_path =  os.path.abspath(__file__)
     print("absolute_file_path : ", absolute_file_path )
-    file_path = "./sample_data/Sample-Superstore.xls"
+    file_path = "/opt/airflow/dags/Salesmodel/sample_data/Sample-Superstore.xls"
     print("file_path : ", file_path)
 
     df = pd.read_excel(file_path)
